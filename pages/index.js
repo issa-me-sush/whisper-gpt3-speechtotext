@@ -141,10 +141,12 @@
 // export default Index;
 
 import React, { useState, useRef,useEffect } from "react";
-
+import { Button, Input, Typography, Row, Col, Card } from 'antd';
 
 
 const MyApp = () => {
+  const { TextArea } = Input;
+const { Title } = Typography;
   const [recording, setRecording] = useState(false);
   const [recordedData, setRecordedData] = useState(null);
   const [processedText, setProcessedText] = useState(null);
@@ -153,6 +155,16 @@ const MyApp = () => {
   const mediaRecorderRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [summary, setSummary] = useState({ text: "" });
+  const [edit, setEdit] = useState(false);
+const [text, setText] = useState("");
+const toggleEdit = () => {
+  setEdit(!edit);
+};
+
+const saveChanges = () => {
+  setSummary({ text });
+  setEdit(false);
+};
   const startRecording = async () => {
     try {
       audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
@@ -248,6 +260,7 @@ const MyApp = () => {
         });
         const sum = await res.json();
         setSummary(sum);
+        setText(sum.text);
         console.log("summarized version:" + JSON.stringify(sum) )
         setIsLoading(false);
       }
@@ -259,46 +272,156 @@ const MyApp = () => {
 
 
   return (
+    // <div style={{ 
+    //   padding: "40px", 
+    //   background: "linear-gradient(to right, #3f51b5, #5c6bc0, #7986cb, #9fa8d4, #c5cae9)", 
+    //   height: "100vh", 
+    //   display: "flex", 
+    //   flexDirection: "column", 
+    //   alignItems: "center", 
+    //   justifyContent: "center" 
+    // }}>
+    //   <button style={{ 
+    //     backgroundColor: "#2196f3", 
+    //     color: "white", 
+    //     padding: "10px 20px",
+    //     borderRadius: "25px",
+    //     marginBottom: "20px"
+    //   }} onClick={startRecording} disabled={recording}>
+    //     Start Recording
+    //   </button>
+    //   <button style={{ 
+    //     backgroundColor: "#f44336", 
+    //     color: "white", 
+    //     padding: "10px 20px", 
+    //     marginLeft: "10px", 
+    //     borderRadius: "25px",
+    //     marginBottom: "20px"
+    //   }} onClick={stopRecording} disabled={!recording}>
+    //     Stop Recording
+    //   </button>
+    //   {recordedData && <audio style={{ marginTop: "20px" }} controls src={recordedData} />}
+    //   {processedText && 
+    //     <p style={{ 
+    //       marginTop: "20px", 
+    //       color: "black", 
+    //       fontSize: "20px" 
+    //     }}>
+    //       Processed Text: {processedText}
+
+    //     </p>
+    //   }
+    //    {isLoading ? <div>Loading ...</div> : <span> Summarized Text: {summary.text} </span>}
+    // </div>
     <div style={{ 
       padding: "40px", 
       background: "linear-gradient(to right, #3f51b5, #5c6bc0, #7986cb, #9fa8d4, #c5cae9)", 
-      height: "100vh", 
+      height: "130vh", 
       display: "flex", 
       flexDirection: "column", 
       alignItems: "center", 
       justifyContent: "center" 
     }}>
-      <button style={{ 
-        backgroundColor: "#2196f3", 
-        color: "white", 
-        padding: "10px 20px",
-        borderRadius: "25px",
-        marginBottom: "20px"
-      }} onClick={startRecording} disabled={recording}>
-        Start Recording
-      </button>
-      <button style={{ 
-        backgroundColor: "#f44336", 
-        color: "white", 
-        padding: "10px 20px", 
-        marginLeft: "10px", 
-        borderRadius: "25px",
-        marginBottom: "20px"
-      }} onClick={stopRecording} disabled={!recording}>
-        Stop Recording
-      </button>
-      {recordedData && <audio style={{ marginTop: "20px" }} controls src={recordedData} />}
-      {processedText && 
-        <p style={{ 
-          marginTop: "20px", 
-          color: "black", 
-          fontSize: "20px" 
-        }}>
-          Processed Text: {processedText}
+  <Card
+  style={{
+    width: '28%',
+    height: '30%',
+    margin: '0% 10% 5% 10%',
+    backgroundImage: `url(${'s2t.jpg'})`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
+  }}
+/>
 
-        </p>
-      }
-       {isLoading ? <div>Loading ...</div> : <span> Summarized Text: {summary.text} </span>}
+
+
+
+
+
+      <Row gutter={16}>
+        <Col span={12}>
+          <Button
+            style={{ 
+              background: "linear-gradient(to right, #2196f3, #64b5f6)", 
+              color: "white", 
+              padding: "10px 20px",
+              borderRadius: "25px",
+              marginBottom: "20px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              display:"flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+            onClick={startRecording}
+            disabled={recording}
+          >
+            {recording ? "Recording..." : "Start Recording"}
+          </Button>
+        </Col>
+        <Col span={12}>
+          <Button
+            style={{ 
+              background: "linear-gradient(to right, #f44336, #e57373)", 
+              color: "white", 
+              padding: "10px 20px", 
+              marginLeft: "10px", 
+              borderRadius: "25px",
+              marginBottom: "20px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              display:"flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+            onClick={stopRecording}
+            disabled={!recording}
+          >
+            Stop Recording
+          </Button>
+        </Col>
+      </Row>
+
+      {recordedData && (
+        <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+          <audio controls src={recordedData} />
+        </Card>
+      )}
+      {processedText && (
+        <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+          <Title level={4} style={{ color: "black" }}>Processed Text:</Title>
+          <TextArea value={processedText} rows={4} readOnly />
+        </Card>
+      )}
+      {isLoading ? (
+    <div>Loading ...</div>
+  ) : (
+    <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+      <Title level={4} style={{ color: "black" }}>Summarized Text:</Title>
+      <TextArea value={summary.text} rows={4} />
+    </Card>
+  )}
+      {isLoading ? (
+    <div>Loading ...</div>
+  ) : (
+    <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+      <Title level={4} style={{ color: "black" }}>Final submission</Title>
+      {edit ? (
+        <>
+          <TextArea value={text} onChange={e => setText(e.target.value)} rows={4} />
+          <Button style={{ marginTop: "10px" }} onClick={saveChanges}>
+            Save
+          </Button>
+        </>
+      ) : (
+        <>
+          <p style={{ marginBottom: "0" }}>{summary.text}</p>
+          <Button style={{ marginTop: "10px" }} onClick={toggleEdit}>
+            Edit
+          </Button>
+        </>
+      )}
+    </Card>
+  )}
     </div>
     
   );
