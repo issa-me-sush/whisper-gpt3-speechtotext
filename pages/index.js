@@ -322,17 +322,25 @@ const saveChanges = () => {
       alignItems: "center", 
       justifyContent: "center" 
     }}>
-  <Card
+ <Card
   style={{
-    width: '28%',
-    height: '30%',
+    width: '20%',
+    height: '100px',
     margin: '0% 10% 5% 10%',
-    backgroundImage: `url(${'s2t.jpg'})`,
+    backgroundImage: `url(${'logo.jpg'})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
+    boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+    "@media (max-width: 576px)": {
+      height: '15px',
+    },
+    "@media (max-width: 375px)": {
+      height: '10px',
+    }
   }}
 />
+
+
 
 
 
@@ -387,27 +395,27 @@ const saveChanges = () => {
         </Card>
       )}
       {processedText && (
-        <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+        <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",width: '76%', maxWidth: '100%'  }}>
           <Title level={4} style={{ color: "black" }}>Processed Text:</Title>
-          <TextArea value={processedText} rows={4} readOnly />
+          <TextArea value={processedText} rows={4} cols={16} readOnly />
         </Card>
       )}
       {isLoading ? (
     <div>Loading ...</div>
   ) : (
-    <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+    <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",width: '76%', maxWidth: '100%' }}>
       <Title level={4} style={{ color: "black" }}>Summarized Text:</Title>
-      <TextArea value={summary.text} rows={4} />
+      <TextArea value={summary.text} rows={4} cols={16}/>
     </Card>
   )}
       {isLoading ? (
     <div>Loading ...</div>
   ) : (
-    <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
+    <Card style={{ marginTop: "20px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",width: '76%', maxWidth: '100%'  }}>
       <Title level={4} style={{ color: "black" }}>Final submission</Title>
       {edit ? (
         <>
-          <TextArea value={text} onChange={e => setText(e.target.value)} rows={4} />
+          <TextArea value={text} onChange={e => setText(e.target.value)} rows={4}  cols={16}/>
           <Button style={{ marginTop: "10px" }} onClick={saveChanges}>
             Save
           </Button>
