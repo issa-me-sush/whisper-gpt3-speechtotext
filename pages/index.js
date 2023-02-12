@@ -316,6 +316,7 @@ const saveChanges = () => {
     <div style={{ 
       padding: "40px", 
       background: "linear-gradient(to right, #3f51b5, #5c6bc0, #7986cb, #9fa8d4, #c5cae9)", 
+      backgroundImage: `url(${'pagebg.jpg'})`,
       height: "130vh", 
       display: "flex", 
       flexDirection: "column", 
