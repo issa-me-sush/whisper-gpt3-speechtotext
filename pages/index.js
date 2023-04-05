@@ -316,7 +316,8 @@ const saveChanges = () => {
     <div style={{ 
       padding: "40px", 
       background: "linear-gradient(to right, #3f51b5, #5c6bc0, #7986cb, #9fa8d4, #c5cae9)", 
-      backgroundImage: `url(${'pagebg.jpg'})`,
+      backgroundImage: 'linear-gradient(to bottom, #a7c1d8, #f0f8ff)'
+      ,
       height: "130vh", 
       display: "flex", 
       flexDirection: "column", 
@@ -328,7 +329,7 @@ const saveChanges = () => {
     width: '20%',
     height: '100px',
     margin: '0% 10% 5% 10%',
-    backgroundImage: `url(${'logo.jpg'})`,
+    backgroundImage: 'linear-gradient(to bottom, #a7c1d8, #f0f8ff)',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
