@@ -38,6 +38,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-next js app for speech to text conversion using whisper ai
+## next js app for speech to text conversion using whisper ai
 
-further summarizing with open ai gpt models
+## further summarizing with open ai gpt models
