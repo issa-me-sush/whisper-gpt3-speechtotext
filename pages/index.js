@@ -329,7 +329,7 @@ const saveChanges = () => {
     width: '20%',
     height: '100px',
     margin: '0% 10% 5% 10%',
-    backgroundImage: 'linear-gradient(to bottom, #a7c1d8, #f0f8ff)',
+   backgroundImage: 'linear-gradient(to bottom, #a7c1d8, #f0f8ff)',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
